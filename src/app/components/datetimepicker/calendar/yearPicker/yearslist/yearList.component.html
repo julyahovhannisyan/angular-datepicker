@@ -1,0 +1,11 @@
+<div class="years-view">
+    <div class="fa fa-angle-left" (click)="generateYear('prev')" style='cursor:pointer;'></div>
+    <div class="years-view__list">
+        <span *ngFor="let year of yearsList" (click)="setYear(year)"
+            [ngClass]="{'selectedYear': year == selectedDate?.getFullYear(),
+    'disabledYear': (year > datePickerObj?.dateSettings?.['maxYear'] || datePickerObj?.dateSettings?.['minYear'] > year) && datePickerObj?.dateSettings?.['maxYear'] > 0}">
+            {{ year }}
+        </span>
+    </div>
+    <div class="fa fa-angle-right" (click)="generateYear('next')" style='cursor:pointer;'></div>
+</div>

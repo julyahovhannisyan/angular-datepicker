@@ -1,0 +1,48 @@
+<div
+  class="dp-calendar-container"
+  [ngClass]="{ single: rangePosition == 'single' }"
+>
+  <div class="dp-details">
+    <cm-monthNav
+      [datePickerObj]="datePickerObj"
+      [rangePosition]="rangePosition"
+      (showList)="showList($event, 'month')"
+    ></cm-monthNav>
+    <div class="year-title">
+      <cm-yearPicker
+        [datePickerObj]="datePickerObj"
+        [rangePosition]="rangePosition"
+        (showList)="showList($event, 'year')"
+      ></cm-yearPicker>
+    </div>
+  </div>
+  <div class="container-wrapper">
+    <table class="calendar-header">
+      <tr>
+        <td>Su</td>
+        <td>Mo</td>
+        <td>Tu</td>
+        <td>We</td>
+        <td>Th</td>
+        <td>Fr</td>
+        <td>Sa</td>
+      </tr>
+    </table>
+
+    <cm-monthCal
+      [datePickerObj]="datePickerObj"
+      [rangePosition]="rangePosition"
+      [hidden]="!monthsList"
+    ></cm-monthCal>
+    <cm-yearList
+      [datePickerObj]="datePickerObj"
+      [rangePosition]="rangePosition"
+      [hidden]="!yearsList"
+    ></cm-yearList>
+    <cm-dayPicker
+      [datePickerObj]="datePickerObj"
+      [rangePosition]="rangePosition"
+      [hidden]="!daysList"
+    ></cm-dayPicker>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="months-nav">
+  <span (click)="navMonth('prev')"> < </span>
+  <span (click)="openMonthsList()"
+    >{{ selectedDate | date : "MMMM" }}
+    <span [ngClass]="{ rotate: monthsList == true }"> v </span></span
+  >
+  <span (click)="navMonth('next')"> > </span>
+</div>

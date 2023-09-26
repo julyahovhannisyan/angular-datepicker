@@ -1,0 +1,4 @@
+<div class="year-dropdown" (click)="openYearsList()">
+    <span>{{ selectedDate | date: 'yyyy'}} </span>
+    <span [ngClass]="{'rotate': yearsList == true}"> v </span>
+</div>

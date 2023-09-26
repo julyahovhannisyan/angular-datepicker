@@ -1,0 +1,17 @@
+<div class="months-view" (click)="setMonth($event)">
+  <span
+    *ngFor="let month of cal_months_labels_short; let i = index"
+    id="{{ month }}"
+    [ngClass]="{
+      firstMonth: i == selectedDate?.getMonth(),
+      disabledMonth:
+        datePickerObj.dateSettings.maxDate &&
+        i > datePickerObj.dateSettings.maxDate.getMonth() &&
+          datePickerObj.dateSettings?.maxDate.getFullYear() ==
+            datePickerObj.navStateDate[rangePosition + 'Date'].getFullYear() &&
+          datePickerObj.dateSettings?.maxDate
+    }"
+  >
+    {{ month }}
+  </span>
+</div>

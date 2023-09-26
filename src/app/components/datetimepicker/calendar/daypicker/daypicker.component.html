@@ -1,0 +1,27 @@
+<table class="day-picker">
+  <tr *ngFor="let week of monthDays">
+    <td *ngFor="let day of week">
+      <span
+        class="day"
+        (click)="setDay(day)"
+        (mouseover)="changeStyle(day.date)"
+        [ngStyle]="{ color: day.date == null ? '#c6c6d1' : '' }"
+        [ngClass]="{ 'inrange': rangePosition != 'single' && day?.date?.inRange == true,
+            'hovering-effect': day?.date?.changeStyle == true,
+            'currentDate':  day?.date?.getTime() == todayDate.getTime(),
+            'selectedDate': (rangePosition != 'single' && (selectedStarttDate?.toString() == day?.date?.toString() || (selectedEndDate?.toString() == day?.date?.toString())))
+             || (rangePosition == 'single' && selectedSingleDate?.getTime() == day?.date?.getTime()),
+             'disabledDay': datePickerObj.dateSettings?.['maxDate'] && (
+                datePickerObj.navStateDate[rangePosition + 'Date'].getFullYear()>(datePickerObj.dateSettings?.['maxDate'].getFullYear()) ||
+                (datePickerObj.dateSettings?.['maxDate'].getFullYear() == datePickerObj.navStateDate[rangePosition + 'Date'].getFullYear() && 
+                    datePickerObj.navStateDate[rangePosition + 'Date'].getMonth()>datePickerObj.dateSettings?.['maxDate'].getMonth()) ||
+                (datePickerObj.dateSettings?.['maxDate'].getFullYear() == datePickerObj.navStateDate[rangePosition + 'Date'].getFullYear() && 
+                    datePickerObj.dateSettings?.['maxDate'].getMonth() == datePickerObj.navStateDate[rangePosition + 'Date'].getMonth() &&
+                    day.day > datePickerObj.dateSettings?.['maxDate'].getDate())
+                )}"
+      >
+        {{ day.day }}
+      </span>
+    </td>
+  </tr>
+</table>

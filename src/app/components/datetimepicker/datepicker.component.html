@@ -1,0 +1,65 @@
+<div #calendar_box class="calendar-container form-control form-control-lg" (clickOutside)="closepopover()"
+    [class.bg-light]='disabled'>
+    <span *ngIf="!settings['rangepicker']" >
+        <input type="hidden">
+        <button class="mr-2 btn-today btn btn-outline-dark" (click)="setDay()" *ngIf="!disabled">Today</button>
+        <div class="date-container" (click)="togglePopoverClick()" [class.bg-light]='disabled'>
+            <span>
+                {{ dateValue != null ?  (dateValue  | date: datePickerObj?.dateSettings?.['format']) : "" }}
+            </span>
+            <i class="fa fa-calendar"></i>
+        </div>
+    </span>
+    <div  *ngIf="!settings['rangepicker']" class="range-date-popover single"
+        [ngClass]="{'banner-true': settings?.['bigBanner'] == true, 'calendar_box_bottom': 350 > distance_from_border}" [hidden]="!popover">
+
+        <cm-calendar class="calendar-wrapper" [datePickerObj]="datePickerObj" rangePosition="single"></cm-calendar>
+
+        <div class="cal-util single">
+            <div *ngIf="!datePickerObj?.dateSettings?.['closeOnSelect']" class="button btn-xs ok" (click)="done()">Apply
+            </div>
+        </div>
+    </div>
+
+    <span *ngIf="settings['rangepicker']">
+        <input type="hidden">
+        <div class="range-input" (click)="togglePopover()">
+            <div class="date-container">
+                
+                <span>
+                    {{ (datePickerObj?.selectedDate?.startDate != null) ?  
+                        (datePickerObj?.selectedDate?.startDate | date: datePickerObj?.dateSettings?.['format']) : ""
+                    }}
+                </span>
+            </div>
+            <div class="date-container">
+                <span>
+                    <i class="fa fa-arrow-circle-o-right range-direc"></i>
+                    {{ (datePickerObj?.selectedDate?.endDate != null) ?  
+                        (datePickerObj?.selectedDate?.endDate | date: datePickerObj?.dateSettings?.['format']) : ""
+                    }}
+                </span>
+                <i class="fa fa-calendar"></i>
+            </div>
+        </div>
+    </span>
+
+    <div *ngIf="settings['rangepicker']" class="range-date-popover" 
+        [ngClass]="{'banner-true': settings['bigBanner'] == true, 'calendar_box_bottom': distance_from_border < 350}" [hidden]="!popover">
+
+        <cm-calendar class="calendar-wrapper" [datePickerObj]="datePickerObj" rangePosition="start"></cm-calendar>
+
+        <cm-calendar class="calendar-wrapper" [datePickerObj]="datePickerObj" rangePosition="end"></cm-calendar>
+
+        <div class="cal-util">
+            <ul class="cal-util__list">
+                <li><a (click)="setRangeDay('today')">Today</a></li>
+                <li><a (click)="setRangeDay('yesterday')">Yesterday</a></li>
+                <li><a (click)="setRangeDate('lastweek')">Last Week</a></li>
+                <li><a (click)="setRangeDate('currentweek')">Current Week</a></li>
+                <li><a (click)="setRangeDate('nextweek')">Next Week</a></li>
+            </ul>
+            <button class="button btn-xs ok" type="button" (click)="done()">Apply</button>
+        </div>
+    </div>
+</div>
